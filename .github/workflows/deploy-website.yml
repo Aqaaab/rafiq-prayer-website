@@ -4,7 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - "website/**"
+      - "index.html"
+      - "privacy.html"
+      - "favicon.svg"
       - ".github/workflows/deploy-website.yml"
   workflow_dispatch:
 
@@ -32,14 +34,14 @@ jobs:
           enablement: true
       - name: Check website files
         run: |
-          test -s website/index.html
-          test -s website/privacy.html
-          test -s website/favicon.svg
-          grep -q 'lang="ar" dir="rtl"' website/index.html
+          test -s index.html
+          test -s privacy.html
+          test -s favicon.svg
+          grep -q 'lang="ar" dir="rtl"' index.html
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
-          path: website
+          path: .
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
