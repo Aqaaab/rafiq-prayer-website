@@ -2,9 +2,9 @@
 
 🌐 **افتح الموقع مباشرة:** https://aqaaab.github.io/rafiq-prayer-website/
 
-📲 **تنزيل تطبيق أندرويد (نسخة تجريبية APK):** https://github.com/Aqaaab/rafiq-prayer/actions/runs/39097506184
+📲 **تنزيل تطبيق أندرويد (أحدث نسخة تجريبية APK):** https://github.com/Aqaaab/rafiq-prayer/actions/runs/39185010898
 
-> ملاحظة: رابط التنزيل الحالي من مخرجات GitHub Actions مؤقت وينتهي في 1 نوفمبر 2026، وقد يتطلب تسجيل الدخول إلى GitHub. افتح صفحة التشغيل ثم قسم **Artifacts** ونزّل `rafiq-prayer-debug-apk`، وبعدها فك ضغط الملف وثبّت APK على هاتف أندرويد.
+> ملاحظة: هذه أحدث عملية بناء متاحة حاليًا (19 أكتوبر 2026). افتح صفحة التشغيل ثم قسم **Artifacts** ونزّل `rafiq-prayer-debug-apk`. الملف ZIP يحتوي على APK؛ فك ضغطه ثم ثبّت ملف APK على هاتف أندرويد. رابط الـArtifact مؤقت وينتهي في 2 نوفمبر 2026، وقد يتطلب تسجيل الدخول إلى GitHub.
 
 موقع تعريفي عربي لتطبيق رفيق الصلاة، بتصميم متجاوب يدعم الهاتف والكمبيوتر.
 
@@ -18,7 +18,7 @@
 ## النشر المجاني
 يستخدم GitHub Actions لنشر الموقع عبر GitHub Pages. لا يحتاج الزائر إلى فتح تبويب **Actions**؛ يكفيه الضغط على رابط الموقع أعلاه.
 
-لإدارة النشر، افتح [سير العمل](https://github.com/Aqaaab/rafiq-prayer-website/actions/workflows/static.yml).
+لإدارة نشر الموقع، افتح [سير العمل](https://github.com/Aqaaab/rafiq-prayer-website/actions/workflows/static.yml).
 
 للدعم والاقتراحات: support.rafiqprayer@gmail.com
 
