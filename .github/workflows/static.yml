@@ -1,36 +1,54 @@
-# Deploy and validate the Rafiq Prayer static website on GitHub Pages
+# Validate every change; deploy GitHub Pages only from trusted non-PR events.
 name: Deploy static content to Pages
 
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate website files
+      - name: Validate website files and APK release link
         run: |
+          set -euo pipefail
           test -s index.html
           test -s privacy.html
           test -s favicon.svg
           grep -q 'lang="ar" dir="rtl"' index.html
+          grep -Fq 'https://github.com/Aqaaab/rafiq-prayer-website/releases/latest/download/rafiq-prayer.apk' index.html
+          if grep -Eq 'releases/download/rafiq-prayer-v[0-9]+/rafiq-prayer.apk' index.html; then
+            echo "::error::APK download CTA must not pin an old release tag."
+            exit 1
+          fi
+
+  deploy:
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
