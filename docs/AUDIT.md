@@ -25,3 +25,12 @@ Replace the pinned v65 URL with GitHub's stable latest-release asset endpoint:
 - No release was created, deleted, or replaced.
 - No production website branch was modified.
 - A focused link correction is proposed in a separate PR.
+
+## Remediation status in PR #1
+
+- The download CTA now points to `/releases/latest/download/rafiq-prayer.apk` rather than the pinned v65 asset.
+- Pages validation now runs for pull requests; deployment is isolated to non-PR events with separate permissions.
+- CI asserts the stable latest-release URL is present and rejects pinned `rafiq-prayer-vN` links.
+- First PR run `45892498298` failed in the original combined validate/deploy job; its job log was unavailable from the connector, so the exact failure cause is not asserted.
+- After splitting validation and deployment, PR run [45892613309](https://github.com/Aqaaab/rafiq-prayer-website/actions/runs/45892613309) passed the `validate` job; `deploy` was correctly skipped for the pull request.
+- Live Pages deployment and browser download redirect remain unverified until the change is merged. No merge or public release was performed.
