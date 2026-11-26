@@ -4,6 +4,8 @@ name: Deploy static content to Pages
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -31,6 +33,11 @@ jobs:
           test -s privacy.html
           test -s favicon.svg
           grep -q 'lang="ar" dir="rtl"' index.html
+          grep -Fq 'https://github.com/Aqaaab/rafiq-prayer-website/releases/latest/download/rafiq-prayer.apk' index.html
+          if grep -Eq 'releases/download/rafiq-prayer-v[0-9]+/rafiq-prayer.apk' index.html; then
+            echo "::error::APK download CTA must not pin an old release tag."
+            exit 1
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
